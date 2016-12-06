@@ -1,4 +1,4 @@
-#### let命令
+## let命令
 
 let命令用来声明变量，用法类似var，但器声明的变量，只在let命令所在的代码快内有效。
 
@@ -7,13 +7,13 @@ let命令用来声明变量，用法类似var，但器声明的变量，只在le
 	var b = 1;
 }
 
-a //ReferenceError: a is not defied.
-b //1
+> a //ReferenceError: a is not defied.
+> b //1
 
 
 for( let i = 0; i < 10; i++ ){}
 console.log( i );
-//ReferenceError: i is not defined
+> //ReferenceError: i is not defined
 
 
 var声明在全局范围内都有效，每次循环j都会覆盖旧值，let声明的变量仅在块级作用域内有效
@@ -31,5 +31,5 @@ for( let l = 0; l < 10; l++ ){
 	}
 }
 
-arr[ 6 ](); // 10
-arr1[ 6 ]();// 6
+> arr[ 6 ](); // 10
+> arr1[ 6 ]();// 6
