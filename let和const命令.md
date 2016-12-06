@@ -19,7 +19,7 @@ console.log( i );
 > //ReferenceError: i is not defined
 
 
-var声明在全局范围内都有效，每次循环j都会覆盖旧值，let声明的变量仅在块级作用域内有效
+***var声明在全局范围内都有效，每次循环j都会覆盖旧值，let声明的变量仅在块级作用域内有效***
 ```
 var arr = [];
 for( var j = 0; j < 10; j++ ){
