@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>left_const</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		{
+			let a = 10;
+			var b = 1;
+		}
+		// console.log( a );
+		console.log( b );
+
+		for( let i = 0; i < 10; i++ ){}
+		// console.log( i );
+
+		var arr = [];
+		for( var j = 0; j < 10; j++ ){
+			arr[ j ] = function(){
+				console.log( j );
+			}
+		}
+
+		var arr1 = [];
+		for( let l = 0; l < 10; l++ ){
+			arr1[ l ] = function(){
+				console.log( l );
+			}
+		}
+
+		arr[ 6 ]();
+		arr1[ 6 ]();
+	</script>
+	
+</body>
+</html>
