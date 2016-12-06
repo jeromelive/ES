@@ -8,15 +8,14 @@
 	var b = 1;
 }
 ```
-
-!a //ReferenceError: a is not defied.
-!b //1
+> a //ReferenceError: a is not defied.
+> b //1
 
 ```
 for( let i = 0; i < 10; i++ ){}
 console.log( i );
 ```
-//ReferenceError: i is not defined
+> //ReferenceError: i is not defined
 
 
 **`var`声明在全局范围内都有效，每次循环j都会覆盖旧值，`let`声明的变量仅在块级作用域内有效:**
@@ -36,8 +35,8 @@ for( let l = 0; l < 10; l++ ){
 }
 ```
 
-!arr[ 6 ](); // 10
-!arr1[ 6 ]();// 6
+> arr[ 6 ](); // 10
+> arr1[ 6 ]();// 6
 
 ##暂时性死区:##
 
@@ -51,5 +50,4 @@ if(true) {
 	let tmp;
 }
 ```
-
 ES6明确规定，如果区块中存在`let`和`const`命令，这个区块对这些命令声明的变量，从一开始就行程了封闭的作用域。凡是在声明之前就使用这些命令，就会报错
