@@ -1,15 +1,15 @@
 ## 1.1.let命令
 
-`let`命令用来声明变量，用法类似`var`，但器声明的变量，只在let命令所在的代码快内有效。
+`let`命令用来声明变量，用法类似`var`，但是声明的变量，只在let命令所在的代码快内有效。
 
 ```
 {
 	let a = 10;
 	var b = 1;
 }
+a //ReferenceError: a is not defied.   
+b //1
 ```
-> a //ReferenceError: a is not defied.   
-> b //1
 
 ```
 for( let i = 0; i < 10; i++ ){}
