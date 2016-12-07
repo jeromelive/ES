@@ -6,81 +6,9 @@
 </head>
 <body>
 
-	<script type="text/javascript">
-		"use strict";
-		{
-			let a = 10;
-			var b = 1;
-		}
-		// console.log( a );
-		console.log( b );
-
-		for( let i = 0; i < 10; i++ ){}
-		// console.log( i );
-
-		var arr = [];
-		for( var j = 0; j < 10; j++ ){
-			arr[ j ] = function(){
-				console.log( j );
-			}
-		}
-
-		var arr1 = [];
-		for( let l = 0; l < 10; l++ ){
-			arr1[ l ] = function(){
-				console.log( l );
-			}
-		}
-
-		arr[ 6 ]();
-		arr1[ 6 ]();
-
-		var tep = 10;
-		{
-			// console.log( tep );
-			let tep = 0;
-		}
-
-		{
-			let a1 = 10;
-			// var a1 = 10;
-		}
-
-		{
-			let a2 = 10;
-			// let a2 = 1;
-		}
-
-
-		// function f(){
-		// 	var temp = 5;
-		// 	if( true ){
-		// 		let temp = 10;
-		// 	}
-		// 	console.log( temp );
-		// }
-		// f();
-
-		{
-			let a = 'secret';
-			function f() {
-				console.log( a );
-			}
-		}
-		// f();
-
-		{
-			const a = "常量";
-			// a = "adad";
-			console.log( a );
-		}
-		{
-			const a = {};
-			a.foo = "hello";
-			a = {};
-		}
-
-	</script>
+	<script type="text/javascript" src="./let_const.js"></script>
+<!-- 	<script type="text/javascript" src="./let_const_test1.js"></script>
+	<script type="text/javascript" src="./let_const_test2.js"></script> -->
 	
 </body>
 </html>
