@@ -8,7 +8,7 @@
 	var b = 1;
 }
 ```
-> a //ReferenceError: a is not defied.
+> a //ReferenceError: a is not defied.   
 > b //1
 
 ```
@@ -35,7 +35,7 @@ for( let l = 0; l < 10; l++ ){
 }
 ```
 
-> arr[ 6 ](); // 10
+> arr[ 6 ](); // 10   
 > arr1[ 6 ]();// 6
 
 ## 1.2.const命令 ##
