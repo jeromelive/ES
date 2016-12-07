@@ -7,6 +7,7 @@
 <body>
 
 	<script type="text/javascript">
+		"use strict";
 		{
 			let a = 10;
 			var b = 1;
@@ -66,7 +67,18 @@
 				console.log( a );
 			}
 		}
-		f();
+		// f();
+
+		{
+			const a = "常量";
+			// a = "adad";
+			console.log( a );
+		}
+		{
+			const a = {};
+			a.foo = "hello";
+			a = {};
+		}
 
 	</script>
 	
