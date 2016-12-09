@@ -1,4 +1,4 @@
-
+console.log( "数组解构赋值" )
 let [ foo, [[bar]], baz ] = [ 1, [[2]], 3 ];
 
 console.log( foo ); // 1
@@ -54,5 +54,5 @@ console.log( yee ) // true;
 //默认值可以应用解构赋值的其他变量，但是该变量必须已经声明
 {
 	let [ x = 1, y = x ] = []; //x=1;y=1;
-	let [ x = y, y = 1 ] = []; //ReferenceError
+	// let [ x = y, y = 1 ] = []; //ReferenceError
 }
