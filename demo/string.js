@@ -15,3 +15,6 @@ console.log(longString.length);
 console.log(longString.charAt(2));
 
 console.log(String.fromCharCode(65, 66, 67));
+
+var s = new String("111");
+console.log(s.prototype === String.prototype);
