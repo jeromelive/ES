@@ -48,3 +48,8 @@ console.log( "对象解构赋值" );
 {
 	// let {foo: {bar}} = {baz: 'baz'};
 }
+
+{
+	let [s] = 'hello';
+	console.log(s);
+}
