@@ -46,5 +46,5 @@ console.log( "对象解构赋值" );
 	console.log( "n: " + n ); //n: null
 }
 {
-	let {foo: {bar}} = {baz: 'baz'};
+	// let {foo: {bar}} = {baz: 'baz'};
 }
