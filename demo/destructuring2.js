@@ -33,7 +33,7 @@ function add( {x = 0, y = 0} = {} ){
 [{x: 1}, {x: undefined}, {x: 3}, {x: null}].map( ({x = 'yes'} = {}) => console.log(x) );//1,'yes',3,null
 [{x: 1}, {x: undefined}, {x: 3}, {x: null}].map( ({x = 'yes'}) => console.log(x) );//与上面的写法功能一样
 //下面对象解构赋值法报错，犹豫undefined和null解构会报错
-[1, undefined, 3, null].map( ({x = 'yes'} = {}) => console.log(x) ); //ReferenceError
+// [1, undefined, 3, null].map( ({x = 'yes'} = {}) => console.log(x) ); //ReferenceError
 
 [[1], [undefined], [3], [null]].map( ([x = 'yes'] = []) => console.log(x) );//1,'yes',3,null
 [[1], [undefined], [3], [null]].map( ([x = 'yes']) => console.log(x) );//与上面的写法功能一样
