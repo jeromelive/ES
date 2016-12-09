@@ -11,6 +11,7 @@ let longString = "This is a very long string which needs \
 				to wrap across multiple lines because \
 				otherwise my code is unreadable.";
 console.log(longString);
+console.log(longString.length);
 console.log(longString.charAt(2));
 
 console.log(String.fromCharCode(65, 66, 67));
