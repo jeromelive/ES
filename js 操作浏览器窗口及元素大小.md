@@ -77,7 +77,7 @@ offsetLeft：元素的左外边框到包含元素的左内边框的距离
 
 offsetTop：元素的上外边框到包含元素的上内边框的距离
 
-另外，还有一个offsetParent 属性，指向包含该元素的引用。offsetParent属性与ParentNode属性不一定相等，例如，<td>元素的offsetParent属性指向的就是他的祖先元素<table>。
+另外，还有一个offsetParent 属性，指向包含该元素的引用。offsetParent属性与ParentNode属性不一定相等，例如，\<td\>元素的offsetParent属性指向的就是他的祖先元素\<table\>。
 
 通过offsetTop、offsetLeft和offsetParent属性，通过不断的向上循环叠加，可以基本准确的获取元素的偏移量，例如：
 
