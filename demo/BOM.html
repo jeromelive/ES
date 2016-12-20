@@ -5,6 +5,8 @@
 	<title>BOM</title>
 </head>
 <body>
+
+	<button>open</button>
 	
 	<script type="text/javascript">
 		// screenLeft 和 screenTop / screenX 和 screenY 属性，分别用于表示窗口相对于屏幕左边和上边的位置
@@ -28,6 +30,21 @@
 		}
 
 		console.log('pageWidth:' + pageWidth + 'pageHeight:' + pageHeight);
+
+		let btn = document.querySelector('button'),
+			worxWin = null;
+		btn.onclick = function(){
+			if(worxWin){
+				worxWin.close();
+				// closed 属性保存着窗口是否关闭
+				console.log(worxWin.closed);
+			}else{
+				worxWin = window.open('http://www.baidu.com', 'wroxWin', 'height=200, width=200, location=no, menubar=no, scrollbars=yes');
+				worxWin.moveTo(100, 100);
+				// opener 属性保存着打开它的原始窗口对象
+				console.log(worxWin.opener);
+			}
+		};
 
 	</script>
 

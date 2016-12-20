@@ -1,1 +1,0 @@
-BOM - window.open() 方法.md
