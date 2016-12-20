@@ -152,7 +152,7 @@ function scrollToTop(elem){
 }
 ```
 
-###　3.4. 确定元素的大小
+### 3.4. 确定元素的大小
 
 浏览器为每个元素提供了一个getBoundingClientRect( )方法，这个方法返回一个矩形对象，包含：left，top，right 和 bottom 属性，这些属性给出了元素相对于浏览器中的视口的位置。但在IE8及以前的浏览器中认为文档的坐上角的坐标是（2，2），而IE9+和其他浏览器则认为是（0，0）。因此，在使用的时候，需要首先检测文档左上角的左边。另外，在一些浏览中不支持getBoundingClientRect( )方法，这是可以使用元素的offsetLeft、offsetHeight属性，以及文档的scrollLeft和scrollTop属性来获取元素相对于视口的top、left、bottom和right属性。综上，可以使用下面的函数来实现跨浏览器获取元素的 rect 对象：
 
