@@ -8,8 +8,18 @@
 
 - typeof 操作符
 
-	- "undefined" 如果这个值未定义，使用 var 声明变量但未对其加以初始化时，这个变量的值就是 undefined
+	- "undefined" 这个值未定义，使用 var 声明变量但未对其加以初始化时，这个变量的值就是 undefined
 
 		**未初始化和未声明的变量的区别，执行 typeof 操作符都返回 undefiend 值，对未声明的变量，只能执行 typeof 操作符不会报错** 
 
-	- "boolean" 如果这个值是布尔值，
+	- "boolean" 这个值是布尔值
+
+	- "string" 这个值是字符串
+
+	- "number" 这个值是数值
+
+	- "object" 这个值是对象或 null
+
+		**null 值表示一个空对象指针，建议对定义的变量准备在将来用于保存对象，最好将变量初始化为 null 而不是其他值**
+
+	- "function" 这个值是函数
