@@ -60,3 +60,134 @@ window.resizeTo(300,300);
 /*将窗口扩大的100*50*/
 window.resizeBy(100,50);
 ```
+
+## 3. 元素大小
+
+获取或设置元素大小的属性和方法，不属于DOM的规范，但各个浏览器都已经支持。
+
+### 3.1. 偏移量
+
+通过下面的4个属性（都以像素计）可以或得元素的偏移量：
+
+offsetHeight：元素在垂直方向上占用的空间大小。包括元素的上下边框和滚动条（如果有），但不包括外边距。
+
+offsetWidht：元素在水平方向桑占用的空间的大小。同上。
+
+offsetLeft：元素的左外边框到包含元素的左内边框的距离
+
+offsetTop：元素的上外边框到包含元素的上内边框的距离
+
+另外，还有一个offsetParent 属性，指向包含该元素的引用。offsetParent属性与ParentNode属性不一定相等，例如，<td>元素的offsetParent属性指向的就是他的祖先元素<table>。
+
+通过offsetTop、offsetLeft和offsetParent属性，通过不断的向上循环叠加，可以基本准确的获取元素的偏移量，例如：
+
+```
+       /*获取元素的偏移量*/
+    function getElementLeft(elem){
+        var actualLeft = elem.offsetLeft,
+            current = elem.offsetParent;
+        while(current != null){
+            actualLeft += current.offsetLeft;
+            current = current.offsetParent;
+        }
+        return actualLeft;
+    }
+
+    function getElementTop(elem){
+        var actualTop = elem.offsetTop,
+            current = elem.offsetParent;
+        while(current != null){
+            actualTop += current.offsetTop;
+            current = current.offsetParent;
+        }
+        return actualTop;
+    }
+```
+
+上面的两个函数，通过不断的叠加offsetLeft 和 offsetTop 值，获取相对精确（不包括所有的的边框的宽度）的元素相对于页面的偏移量。
+
+注：这4个属性是只读的
+
+### 3.2. 客户区大小
+
+元素的客户区大小指的是元素的内容，及其内边距占据的空间的大小。使用下面的两个属性表示：
+
+clientWidth：元素内容区域加左右内边距的宽度
+
+clientHeight：元素内容区域加上下内边距的宽度
+
+注：这两个属性是只读的
+
+### 3.3. 滚动大小
+
+滚动大小指的是包含滚动内容的元素的大小。使用下面的4个属性表示：
+
+scrollWidth：在没有滚动条时，表示内容元素的高度，和width属性相同；在有滚动条时，包含滚动条和隐藏部分的总高度。
+
+scrollHeight：在没有滚动条时，表示内容元素的宽度，和height属性相同；在有滚动条时，包含滚动条和隐藏部分的总宽度。
+
+scrollLeft：被隐藏在内容区左侧的像素数。通过设置这个属性，可以改变元素的滚动位置。
+
+scrollHeight：被隐藏在内容区上方的像素数。通过设置这个属性，可以改变元素的滚动位置。
+
+scrollWidth 和 scrollHeight 属性主要用来确定元素内容的实际大小。例如，带有滚动条的页面的高度是 documen.documentElement.scrollHeight。但对于不包含滚动条的页面，在各个浏览器中 scrollHeight 和 scrollWidth 与 clientWidth 和 clientHeight 表示的宽高有交错，为了准确的获取文档的总高度，应该使用这两组属性较大的一个。例如，下面的代码：
+
+```
+     /*获取文档的高度*/
+var docHeight = Math.max(document.documentElement.scrollHeight,
+                        document.documentElement.clientHeight);
+    /*获取文档的宽度*/
+var docWidth = Math.max(document.documentElement.scrollWidth,
+                        document.documentElement.clientWidth);
+```
+
+scrollLeft和scrollTop属性既可以确定当前元素的滚动状态，也可以用来设置元素的滚动位置。例如，当元素不是顶部时，设置它滚动到顶部：
+
+```
+     /*设置元素返回顶部*/
+function scrollToTop(elem){
+    if(elem.scrollTop != 0){
+        elem.scrollTop = 0;
+    }
+}
+```
+
+###　3.4. 确定元素的大小
+
+浏览器为每个元素提供了一个getBoundingClientRect( )方法，这个方法返回一个矩形对象，包含：left，top，right 和 bottom 属性，这些属性给出了元素相对于浏览器中的视口的位置。但在IE8及以前的浏览器中认为文档的坐上角的坐标是（2，2），而IE9+和其他浏览器则认为是（0，0）。因此，在使用的时候，需要首先检测文档左上角的左边。另外，在一些浏览中不支持getBoundingClientRect( )方法，这是可以使用元素的offsetLeft、offsetHeight属性，以及文档的scrollLeft和scrollTop属性来获取元素相对于视口的top、left、bottom和right属性。综上，可以使用下面的函数来实现跨浏览器获取元素的 rect 对象：
+
+```
+     function getBoundingClientRect(elem){
+        var scrollTop = document.documentElement.scrollTop;
+        var scrollLeft = document.documentElement.scrollLeft
+        if(elem.getBoundingClientRect){
+            if(typeof arguments.callee.offset != "number"){
+                var temp = document.createElement("div");
+                temp.style.cssText = "positon:absolute;left:0;top:0;";
+                document.body.appendChild(temp);
+                arguments.callee.offset = -temp.getBoundingClientRect().top - scrollTop;
+                document.body.removeChild(temp);
+                temp = null;
+            }
+            var rect = elem.getBoundingClientRect();
+            var offset = arguments.callee.offset;
+            return {
+                left : rect.left + offset,
+                right : rect.right + offset,
+                top : rect.top + offset,
+                bottom : rect.bottom + offset
+            }
+        }else{
+            var actualLeft = getElementLeft(elem);
+            var actualTop = getElementTop(elem);
+            return {
+                left : actualLeft - scrollLeft,
+                right : actualLeft + elem.offsetWidth - scrollLeft,
+                top : actualTop - scrollTop,
+                bottom : actualTop + elem.offsetHeight - scrollTop
+
+            }
+        }
+
+    }
+```
