@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>BOM</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// screenLeft 和 screenTop / screenX 和 screenY 属性，分别用于表示窗口相对于屏幕左边和上边的位置
+		var leftPos = (typeof window.screenLeft === 'number') ? window.screenLeft : window.screenX;
+		var topPos = (typeof window.screenTop === 'number') ? window.screenTop : window.screenY;
+		console.log('左边距:' + leftPos + '上边距:' + topPos);
+
+		// innerWidth innerHeight outerWidth 和 outerHeight ，前两个返回浏览器视图区的大小（减去边框宽度），后两个返回浏览器本身大小 
+		// 获取页面可见视口的大小
+		var pageWidth = window.innerWidth,
+			pageHeight = window.innerHeight;
+
+		if(typeof pageWidth != 'number'){
+			if(document.compatMode == 'CSS1Compat'){ //检测页面是否处于标准模式（考虑IE6的情况）
+				pageWidth = document.documentElement.clientWidth;
+				pageHeigjt = document.documentElement.clientHeight;
+			}else{
+				pageWidth = document.body.clientWidth;
+				pageHeight = document.body.clientHeight;
+			}
+		}
+
+		console.log('pageWidth:' + pageWidth + 'pageHeight:' + pageHeight);
+
+	</script>
+
+</body>
+</html>
