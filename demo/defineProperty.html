@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>defineProperty 方法</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// ECMAScript 中有两个属性：数据属性和访问器属性
+		// 数据属性
+		let obj = new Object();
+		Object.defineProperty(obj, 'age', {
+			configurable: true,
+			enumerable: true,
+			writable: true,
+			value: 24
+		});
+		console.log(obj.age);
+
+		// 读取属性的特性
+		// Object.getOwnPropertyDescriptor() 方法只能用于实例属性，要取得原型属性的描述符，必须直接在原型对象上调用 Object.getOwnPropertyDescriptor() 方法
+		console.log(Object.getOwnPropertyDescriptor(obj, 'age'));
+
+		// 访问器属性
+		let obj1 = new Object();
+		obj1._year = 2004;
+		Object.defineProperty(obj1, 'year', {
+			configurable: false,
+			enumerable: false,
+			get: function(){
+				return this._year;
+			},
+			set: function(newValue){
+				if(newValue > this._year){
+					this._year = newValue;
+				}
+			}
+		});
+
+		console.log(obj1._year);
+		obj1.year = 2005;
+		console.log(obj1._year);
+
+		// 定义多个属性
+		let obj2 = new Object();
+		obj2._year = 2001;
+		Object.defineProperties(obj2, {
+			name: {
+				configurable: true,
+				enumerable: false,
+				writable: true,
+				value: 'jerome'
+			},
+			age: {
+				writable: true,
+				value: 24
+			},
+			year: {
+				get: function(){
+					return this.year;
+				},
+				set: function(newValue){
+					if(newValue > this._year){
+						this.name = '长大了';
+						this.age += newValue - this._year;
+					}
+				}
+			}
+		});
+
+		obj2.year = 2016;
+		console.log(obj2.name);
+		console.log(obj2.age);
+
+
+		// 1. 原型对象，没创建一个新的函数，就会根据一组特定的规则为该函数创建一个 prototype 属性，这个属性指向函数的原型对象
+		function Person(){}
+		Person.prototype.name = 'jerome';
+		Person.prototype.job = '前端';
+
+		let person1 = new Person();
+		person1.age = 24;
+		person1.school = '仲恺农业工程学院';
+		console.log(Object.getOwnPropertyDescriptor(person1, 'prototype'));
+		
+		// 2. 原型与 in 操作符
+		// Object.keys() 方法可以获取对象上所有可枚举的实例属性
+		console.log(Object.keys(person1));
+		// Objects.getOwnPropertyNames() 方法可以获取所有实例属性，无论是否可枚举
+
+
+		// 3. 更简单的原型语法
+		// 本质上重写了默认的 prototype 对象，因此 constructor 先混个也就变成了新对象的 constructo 属性（指向 Object 构造函数）,不再指向 Person 函数
+		// instanceof 仍然会返回正确的结果，但是 constructor 已经无法确定对象的类型了
+		// 4. 原型的动态性
+		// 实例中的指针仅指向原型，而不指向构造函数
+		// 重写原型对象切断了现有原型与任何之前已经存在的对象之间的联系，已存在对象引用的仍然是最初的原型
+		Person.prototype = {
+			// 也可以指定 constructor，原生的 constructor 属性是不可枚举的 
+			// constructor: Person,
+			name: 'js',
+			job: '搬砖'
+		}
+
+		console.log(person1);
+
+		person1.name = '小东东';
+		console.log(person1);
+
+	</script>
+	
+
+</body>
+</html>
