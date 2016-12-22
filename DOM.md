@@ -21,8 +21,8 @@
 	- Node.ENTITY_REFERENCE_NODE(5);
 	- Node.ENTITY_NODE(6);
 	- Node.PROCESSING_INSTRUCTION_NODE(7);
-	- Node.COMMENT_NODE(8);
-	- Node.DOCUMENT_NODE(9);
+	- Node.COMMENT_NODE(8);		// 注释节点
+	- Node.DOCUMENT_NODE(9);	// document 节点
 	- Node.DOCUMENT_TYPE_NODE(10);
 	- Node.DOCUMENT_FRAGMENT_NODE(11);
 	- Node.NOTATION_NOTE(12);
@@ -47,11 +47,78 @@ someNode.nodeType == 1 // 适合用于所有浏览器
 
 - parentNode 指向文档树的父节点
 
-- previueSibling 和 nextSibling 可以访问同一列表中的其他节点
+- previousSibling 和 nextSibling 可以访问同一列表中的其他节点
 > 列表中第一个节点的 previousSibling 属性的值为 null , 而列表中最后一个节点的 nextSibling 属性的值同样也为 null
 
 - firstChild 和 lastChild 分别指向列表中的第一个和最后一个节点
 
+- ownerDocument 指向表示整个文档的文档节点
+
 ##### 方法
 
 - hasChildNodes() 节点包含一或多个子节点的情况下返回 true
+
+#### 操作节点
+
+- appendChild() 方法用于向 childNodes 列表的末尾添加一个节点。只接受一个参数：即要插入的节点。且返回新增的节点
+
+> 如果传入到 appendChild() 中的节点已经是文档的一部分，那结果就是将该节点从原来的位置转移到新位置
+
+- insertBefore() 方法用于在某个特定的位置上插入节点，接受两个参数：要插入的节点和作为参照的节点。且返回插入的节点
+
+> 如果参照节点是 null ，则 insertBefore() 和 appendChild() 执行相同的操作
+
+- replaceChild() 方法用于替代某个特定的子节点，接受两个参数：要插入的节点和要替换的节点。且返回插入的节点
+
+- removeChild() 方法用于移除特定的子节点。只接受一个参数：即要移除的节点。且返回被移除的节点
+
+> replaceChild 和 removeChild 方法被替换或移除的子节点仍然为文档所有，只是在文档中已经没有了自己的位置
+
+> 上面介绍的四个方法操作都是某个节点的子节点，必须先取得父节点才能使用。另外，并不是所有类型的节点都有子节点，如果在不支持子节点的节点上调用了这些方法，将会导致错误发生
+
+#### 其他方法
+
+- cloneNode() 用于创建调用这个方法的节点的一个完全相同的副本。接受一个布尔值参数，表示是否执行深复制。
+	
+	参数为true ，执行深赋值，就是复制节点及其整个子节点数   
+	参数为false ，执行浅赋值，只复制节点本身 
+
+- normalize() 方法处理文档树中的文本节点
+
+> 在某个节点上调用这个方法时，如果找到了空文本及诶单，则删除它；如果找到相邻的文本节点，则将它们合并为一个文本节点
+
+#### Document 类型
+
+**document 对象是 HTMLDocument(继承自 Document 类型)的一个实例，表示整个 HTML 页面**
+
+- nodeType 的值为9
+- nodeName 的值为"#document"
+- nodeValue 的值为 null
+- parentNode 的值为 null
+- ownerDocument 的值为 null
+- 其子节点可能是一个 DocumentType (最多一个)、Element (最多一个)、ProcessingInsttuction 或 Comment
+
+获取 html 元素的三种方法
+```
+document.documentElement;
+document.childNodes[0];
+document.firstChild;
+```
+
+获取 body 元素
+```
+document.body;
+```
+
+获取`<!DOCTYPE>`标签
+```
+document.doctype // 浏览器的支持差别很大 
+```
+
+获取浏览器窗口的标题栏或标签页上，可以修改当前页面的标题并反映在浏览器的标题栏中
+```
+// 取得文档标题
+var title = document.title;
+// 设置文档标题
+document.title = 'New Page title';
+```
