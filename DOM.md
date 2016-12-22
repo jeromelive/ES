@@ -157,3 +157,43 @@ var referrer = document.referrer;
 
 > 如果域名一开始是"松散的"，那么久不能将它再设置为"紧绷的"。就是说：将 document.demain 设置为 "wrox.com" 之后，不能再讲起设置会 "p2p.wrox.com"，否则将会导致错误
 
+3. 查找元素
+
+----
+
+document.getElementById() 通过 id 查找,如果存在相同 id 的元素，返回第一个找到的元素，没找到，则返回 null
+
+document.getElementsByClassName() 通过类名查找，返回零或多个元素的 HTMLCollection 对象
+
+document.getElementsByTagName() 通过标签名查找，返回零或多个元素的 HTMLCollection 对象
+
+**要想获取文档中的所有元素，可以使用 getElementsByTagName('*');**
+
+document.getElementsByName() 通过 name 特性查找，返回零或多个元素的 HTMLCollection 对象
+
+> HTMLCollection 对象与 NodeList 对象类似，也是 "动态" 集合。可以使用方括号语法或 item() 方法来访问 HTMLCollection 对象中的项，也可以通过 length 属性获取对象的元素数量。并且还有一个方法：nomedItem()，使用这个方法可以通过元素的 name 特性取得集合中的项
+
+4. 特殊集合
+
+-----
+
+以下集合都是 HTMLCollection 对象
+
+document.anchors，包含文档中所有带有 namr 特性的 a 元素
+
+document.forms，包含文档中所有的 form 元素，与 document.getElementsByTagName('form') 得到的结果相同
+
+document.images，包含文档中所有的 img 元素，与 document.getElementsByTagName('img') 得到的结果相同
+
+document.links，包含文档中所有带 href 特性的 a 元素
+
+
+5. 文档写入
+
+write() 
+
+writeln()
+
+open()
+
+close()
