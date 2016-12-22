@@ -75,16 +75,20 @@
 
 		// reload() 方法的作用是重新加载当前显示的页面，如果不传递任何参数，页面就会以最有效的方式重新加载
 		// 传递参数 true ，强制浏览器从服务器中加载数据，否则有可能从缓存中加载
-		var timeout = null;
-		timeout = setTimeout(function(){
-			location.reload();
-			console.log('timeout');
-			clearTimeout(timeout);
-		},1000);
+		// var timeout = null;
+		// timeout = setTimeout(function(){
+		// 	location.reload();
+		// 	console.log('timeout');
+		// 	clearTimeout(timeout);
+		// },1000);
 
 		// var interval = setInterval(function(){
 		// 	location.reload();
 		// },1000);
+
+		console.log(document.URL);
+		console.log(document.domain);
+		console.log(document.referrer);
 
 	</script>
 

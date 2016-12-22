@@ -122,3 +122,23 @@ var title = document.title;
 // 设置文档标题
 document.title = 'New Page title';
 ```
+
+与网页的请求有关的属性，URL、domain 和 referrer
+- URL 包含页面完整的URL(即地址栏中显示的URL)
+- domain 页面的域名
+- referrer 链接到当前页面的那个页面的 URL ，在没有来源页面的情况下，refeerer 属性可能会是空字符串
+
+```
+// 获取完整的 URL
+var url = document.URL;
+
+// 获取域名
+var domain = document.domain;
+
+// 取得来源页面的 URL
+var referrer = document.referrer;
+```
+
+> URL 与 domain 属性是相互关联的。
+> 如果 document.URL 等于 http://www.wrox.com/WileyCDA/，那么 document.domain 就等于 www.wrox.com
+> 其中 domain 是可以设置的。但由于安全方面的限制，domain 并不能设置任何值，例如 p2p.wrox.com，domain 只能设置为 "wrox.com"
