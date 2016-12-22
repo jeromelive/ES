@@ -99,6 +99,11 @@ someNode.nodeType == 1 // 适合用于所有浏览器
 - ownerDocument 的值为 null
 - 其子节点可能是一个 DocumentType (最多一个)、Element (最多一个)、ProcessingInsttuction 或 Comment
 
+
+1.文档节点
+
+----
+
 获取 html 元素的三种方法
 ```
 document.documentElement;
@@ -115,6 +120,9 @@ document.body;
 ```
 document.doctype // 浏览器的支持差别很大 
 ```
+2. 文档信息
+
+----
 
 获取浏览器窗口的标题栏或标签页上，可以修改当前页面的标题并反映在浏览器的标题栏中
 ```
@@ -148,3 +156,4 @@ var referrer = document.referrer;
 > 当页面中包含来自其他子域的框架或内嵌框架时，通过设置 document.domain 能是这些页面相互访问对方包含的 JavaScript 对象。例如，假设有一个页面加载子 www.wrox.com，其中包含一个内嵌框架，框架内的页面加载子 p2p.wrox.com。由于 document.domain 字符串不一样，内外两个页面之间无法相互访问对方的 JavaScript 对象。但将两个页面的 document.domain 值都设置为 'wrox.com'，它们之间就可以通信了。
 
 > 如果域名一开始是"松散的"，那么久不能将它再设置为"紧绷的"。就是说：将 document.demain 设置为 "wrox.com" 之后，不能再讲起设置会 "p2p.wrox.com"，否则将会导致错误
+
