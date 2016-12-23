@@ -5,6 +5,8 @@
 	<title>DOM</title>
 </head>
 <body>
+
+	<p class="p">看我</p>
 	
 	<script type="text/javascript">
 		var fragment = document.createDocumentFragment();
@@ -37,6 +39,13 @@
 		tbody.rows[1].cells[1].appendChild(document.createTextNode('Cell 2,2'));
 
 		document.body.appendChild(table);
+
+		// insetAdjacentHTML() 方法
+		var p1 = document.getElementsByClassName('p')[0];
+		p1.insertAdjacentHTML('beforebegin', '<p>1.Hello world!</p>');
+		p1.insertAdjacentHTML('afterbegin', '<p>2.Hello world!</p>');
+		p1.insertAdjacentHTML('beforeend', '<p>3.Hello world!</p>');
+		p1.insertAdjacentHTML('afterend', '<p>4.Hello world!</p>');
 
 	</script>
 
