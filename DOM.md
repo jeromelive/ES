@@ -24,7 +24,7 @@
 	- Node.COMMENT_NODE(8);		// 注释节点
 	- Node.DOCUMENT_NODE(9);	// document 节点
 	- Node.DOCUMENT_TYPE_NODE(10);
-	- Node.DOCUMENT_FRAGMENT_NODE(11);
+	- Node.DOCUMENT_FRAGMENT_NODE(11); // 文档片段节点
 	- Node.NOTATION_NOTE(12);
 
 ```

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DOM</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		var fragment = document.createDocumentFragment();
+		var p = null;
+		for(var i = 0; i < 3; i++){
+			p = document.createElement('p');
+			p.appendChild(document.createTextNode(i + '.Hello World!'));
+			fragment.appendChild(p);
+		}
+		document.body.appendChild(fragment);
+	</script>
+
+</body>
+</html>
