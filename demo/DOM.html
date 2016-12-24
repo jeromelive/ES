@@ -3,10 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>DOM</title>
+	<style type="text/css">
+		div{
+			background-color: black;
+		}
+	</style>
 </head>
 <body>
 
 	<p class="p">看我</p>
+	<div style="width: 200px; height: 200px;border: 1px solid" onclick='bigger(this)'></div>
 	
 	<script type="text/javascript">
 		var fragment = document.createDocumentFragment();
@@ -42,10 +48,108 @@
 
 		// insetAdjacentHTML() 方法
 		var p1 = document.getElementsByClassName('p')[0];
-		p1.insertAdjacentHTML('beforebegin', '<p>1.Hello world!</p>');
-		p1.insertAdjacentHTML('afterbegin', '<p>2.Hello world!</p>');
-		p1.insertAdjacentHTML('beforeend', '<p>3.Hello world!</p>');
-		p1.insertAdjacentHTML('afterend', '<p>4.Hello world!</p>');
+		// p1.insertAdjacentHTML('beforebegin', '<p>1.Hello world!</p>');
+		// p1.insertAdjacentHTML('afterbegin', '<p>2.Hello world!</p>');
+		// p1.insertAdjacentHTML('beforeend', '<p>3.Hello world!</p>');
+		// p1.insertAdjacentHTML('afterend', '<p>4.Hello world!</p>');
+
+		// 节点操作
+		var textNode = p1.firstChild;
+		// console.log(textNode);
+		console.log(textNode.nodeValue);
+
+		textNode.appendData('appendData');
+		console.log(textNode.nodeValue);
+
+		textNode.deleteData(0, 1);
+		console.log(textNode.nodeValue);
+
+		textNode.insertData(0, 'insertData');
+		console.log(textNode.nodeValue);
+
+		textNode.replaceData(1, 1, 'replaceData');
+		console.log(textNode.nodeValue);
+
+		console.log(textNode.substringData(0,4));
+
+		console.log(textNode.splitText(5).nodeValue);
+		console.log(textNode.nodeValue);
+
+		console.log(p1.childNodes.length);
+
+		p1.normalize();
+		console.log(p1.childNodes.length);
+		console.log(textNode.nodeValue);
+		console.log(p1.firstChild.nodeValue);
+
+		console.log(document.implementation.hasFeature('CSS', '2.0'));
+
+		// 样式
+		var myDiv = document.getElementsByTagName('div')[0];
+
+		console.log(myDiv.style);
+		console.log(myDiv.style.backgroundColor);
+		console.log(myDiv.style.width);
+
+		console.log(myDiv.style.cssText);
+		console.log(myDiv.style.length);
+
+		// console.log(myDiv.style.getPropertyCSSValue('width'));
+		// console.log(myDiv.style.getPropertypriority('width'));
+		console.log(myDiv.style.getPropertyValue('width'));
+
+		for(var i = 0; i < myDiv.style.length; i++){
+			console.log(myDiv.style.item(i));
+		}
+
+		function bigger(el){
+			el.style.width = '300px';
+		}
+
+		var computedStyle = document.defaultView.getComputedStyle(myDiv,null);
+
+		console.log(computedStyle.backgroundColor);
+
+
+		// 元素的大小
+		console.log('offsetWidth:' + myDiv.offsetWidth);
+		console.log('offsetHeight:' + myDiv.offsetHeight);
+		console.log('offsetLeft:' + myDiv.offsetLeft);
+		console.log('offsetTop:' + myDiv.offsetTop);
+
+		getOffsetLeft(myDiv);
+
+		function getOffsetLeft(el){
+			var actualLeft = el.offsetLeft,
+				actualTop = el.offsetTop,
+				current = el.offsetParent;
+
+			while(current !== null){
+				actualLeft += current.offsetLeft;
+				actualTop += current.offsetTop;
+				current = current.offsetParent;
+			}
+
+			console.log('offsetParent:' + actualLeft);
+			console.log('offsetParent:' + actualTop);
+		}
+
+		console.log(getViewport());
+
+		function getViewport () {
+			if (document.compatMode == 'BackCompat') {
+				return {
+					width: document.body.clientWidth,
+					height: document.body.clientHeight
+				}
+			}else{
+				return {
+					width: document.documentElement.clientWidth,
+					height: document.documentElement.clientHeight
+				}
+			}
+		}
+
 
 	</script>
 

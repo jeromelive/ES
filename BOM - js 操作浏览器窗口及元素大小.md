@@ -48,9 +48,26 @@ window.moveBy(0,100);
 ```
 var viewWidth = (typeof window.innerWidth === "number") ? window.innerWidth : document.documentElement.clientWidth;
 var viewHeight = (typeof window.innerHeight === "number") ? window.innerHeight : document.documentElement.clientHeight;
+
+var view = getViewport();
+
+function getViewport () {
+    if (document.compatMode == 'BackCompat') {
+        return {
+            width: document.body.clientWidth,
+            height: document.body.clientHeight
+        }
+    }else{
+        return {
+            width: document.documentElement.clientWidth,
+            height: document.documentElement.clientHeight
+        }
+    }
+}
+
 ```
 
-对于移动设备，window.innerHeight 和 window.innerWidth 保存和可见视口，而移动IE不支持这两个属性，但在document.documentElement.clientHeight 和 document.documentElementWidth 中保存这同样的属性。但在其他浏览器中，后面的这两个属性表示的是整个页面布局视口，也就是页面选然后的实际大小。而IE把后面的这两属性，保存在document.body.clientWidth和document.documentElemtn.clientHeight中。
+对于移动设备，window.innerHeight 和 window.innerWidth 保存和可见视口，而移动IE不支持这两个属性，但在document.documentElement.clientHeight 和 document.documentElementWidth 中保存这同样的属性。但在其他浏览器中，后面的这两个属性表示的是整个页面布局视口，也就是页面选然后的实际大小。而 IE 把后面的这两属性，保存在document.body.clientWidth和document.body.clientHeight中。
 
 使用 resizeTo( ) 和 resizeBy( )两个方法可以调整窗口的大小，resizeTo( )方法接收两个参数，新的宽度和高度; resizeBy( )方法也接收两个参数，新窗口和元窗口的宽度和高度差。例如：
 
@@ -71,7 +88,7 @@ window.resizeBy(100,50);
 
 offsetHeight：元素在垂直方向上占用的空间大小。包括元素的上下边框和滚动条（如果有），但不包括外边距。
 
-offsetWidht：元素在水平方向桑占用的空间的大小。同上。
+offsetWidth：元素在水平方向桑占用的空间的大小。同上。
 
 offsetLeft：元素的左外边框到包含元素的左内边框的距离
 
@@ -82,26 +99,26 @@ offsetTop：元素的上外边框到包含元素的上内边框的距离
 通过offsetTop、offsetLeft和offsetParent属性，通过不断的向上循环叠加，可以基本准确的获取元素的偏移量，例如：
 
 ```
-       /*获取元素的偏移量*/
-    function getElementLeft(elem){
-        var actualLeft = elem.offsetLeft,
-            current = elem.offsetParent;
-        while(current != null){
-            actualLeft += current.offsetLeft;
-            current = current.offsetParent;
-        }
-        return actualLeft;
+/*获取元素的偏移量*/
+function getElementLeft(elem){
+    var actualLeft = elem.offsetLeft,
+        current = elem.offsetParent;
+    while(current != null){
+        actualLeft += current.offsetLeft;
+        current = current.offsetParent;
     }
+    return actualLeft;
+}
 
-    function getElementTop(elem){
-        var actualTop = elem.offsetTop,
-            current = elem.offsetParent;
-        while(current != null){
-            actualTop += current.offsetTop;
-            current = current.offsetParent;
-        }
-        return actualTop;
+function getElementTop(elem){
+    var actualTop = elem.offsetTop,
+        current = elem.offsetParent;
+    while(current != null){
+        actualTop += current.offsetTop;
+        current = current.offsetParent;
     }
+    return actualTop;
+}
 ```
 
 上面的两个函数，通过不断的叠加offsetLeft 和 offsetTop 值，获取相对精确（不包括所有的的边框的宽度）的元素相对于页面的偏移量。
@@ -122,21 +139,21 @@ clientHeight：元素内容区域加上下内边距的宽度
 
 滚动大小指的是包含滚动内容的元素的大小。使用下面的4个属性表示：
 
-scrollWidth：在没有滚动条时，表示内容元素的高度，和width属性相同；在有滚动条时，包含滚动条和隐藏部分的总高度。
+scrollWidth：在没有滚动条时，表示内容元素的宽度，和width属性相同；在有滚动条时，包含滚动条和隐藏部分的总宽度。
 
-scrollHeight：在没有滚动条时，表示内容元素的宽度，和height属性相同；在有滚动条时，包含滚动条和隐藏部分的总宽度。
+scrollHeight：在没有滚动条时，表示内容元素的高度，和height属性相同；在有滚动条时，包含滚动条和隐藏部分的总高度。
 
 scrollLeft：被隐藏在内容区左侧的像素数。通过设置这个属性，可以改变元素的滚动位置。
 
-scrollHeight：被隐藏在内容区上方的像素数。通过设置这个属性，可以改变元素的滚动位置。
+scrollTop：被隐藏在内容区上方的像素数。通过设置这个属性，可以改变元素的滚动位置。
 
 scrollWidth 和 scrollHeight 属性主要用来确定元素内容的实际大小。例如，带有滚动条的页面的高度是 documen.documentElement.scrollHeight。但对于不包含滚动条的页面，在各个浏览器中 scrollHeight 和 scrollWidth 与 clientWidth 和 clientHeight 表示的宽高有交错，为了准确的获取文档的总高度，应该使用这两组属性较大的一个。例如，下面的代码：
 
 ```
-     /*获取文档的高度*/
+/*获取文档的高度*/
 var docHeight = Math.max(document.documentElement.scrollHeight,
                         document.documentElement.clientHeight);
-    /*获取文档的宽度*/
+/*获取文档的宽度*/
 var docWidth = Math.max(document.documentElement.scrollWidth,
                         document.documentElement.clientWidth);
 ```
@@ -144,7 +161,7 @@ var docWidth = Math.max(document.documentElement.scrollWidth,
 scrollLeft和scrollTop属性既可以确定当前元素的滚动状态，也可以用来设置元素的滚动位置。例如，当元素不是顶部时，设置它滚动到顶部：
 
 ```
-     /*设置元素返回顶部*/
+/*设置元素返回顶部*/
 function scrollToTop(elem){
     if(elem.scrollTop != 0){
         elem.scrollTop = 0;

@@ -113,8 +113,7 @@ element.parentNode.replaceChild(p,div);
 ```
 
 - insertAdjacentHTML() 方法按照指定位置插入 HTML 文本，接受两个参数：插入的位置和要插入的 HTML 文本
-
-第一个参数必需是下列值之一：
+	- 第一个参数必需是下列值之一：
 	- 'beforebegin': 在当前元素之前插入一个紧邻的同辈元素
 	- 'afterbegin': 在当前元素之下插入一个新的子元素或在第一个元素之前再插入新的子元素
 	- 'beforeend': 在当前元素之下插入一个新的子元素或在最后一个子元素之后再插入新的子元素
