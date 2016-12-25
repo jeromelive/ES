@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件对象</title>
+</head>
+<body>
+	<button id="myBtn">Click me</button>
+
+	<script type="text/javascript">
+		var btn = document.getElementById('myBtn');
+		btn.onclick = function (event) {
+			// console.log(event.target.type);
+			// console.log(event.eventPhase);
+			console.log(event.keys);
+		}
+		// document.body.onclick = function(event){
+		// 	console.log(event.currentTarget === this);
+		// 	console.log(event.currentTarget === document.body);
+		// 	console.log(event.target === this);
+		// 	console.log(event.target === btn);
+		// }
+
+		// document.body.addEventListener('click', function (event) {
+		// 	console.log(event.eventPhase);
+		// }, true);
+
+		// document.body.onclick = function (event) {
+		// 	console.log(event.eventPhase);
+		// }
+
+
+		var EventUtil = {
+			addHandler: function (element, type, handler) {
+				if (document.addEventListener) {
+					element.addEventListener(type, handler, false);
+				}else if (document.attachEvent) {
+					element.attachEvent('on' + type, handler);
+				}else{
+					element['on' + type] = handler;
+				}
+			},
+			removeHandler: function (element, type, handler) {
+				if (document.removeEventListener) {
+					element.removeEventListener(type, handler, false);
+				}else if (document.detachEvent) {
+					element.detachEvent('on' + type, handler);
+				}else{
+					element['on' + type] = null;
+				}
+			},
+
+			// 跨浏览器的事件对象
+			getEvent: function (event) {
+				return event ? event : window.event;
+			},
+			getTarget: function (event) {
+				return event.target || window.event.srcElement;
+			},
+			preventDefault: function (event) {
+				if (event.preventDefault) {
+					event.preventDefault();
+				}else{
+					event.returnValue = false;
+				}
+			},
+
+			stopPropagation: function (event) {
+				if (event.stopPropagation){
+					event.stopPropagation();
+				}else{
+					event.cancelBubble = true;
+				}
+			}
+		}
+
+		var handler = function(event){
+			console.log('clientX:' + event.clientX + 'clientY:' + event.clientY + 'pageX:' + event.pageX + 'pageY:' + event.pageY + 'screenX:' + event.screenX + 'screenY:' + event.screenY);
+		}
+
+		// EventUtil.addHandler(document.body, 'mousemove', handler);
+	</script>
+</body>
+</html>
