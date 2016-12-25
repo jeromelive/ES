@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件</title>
+</head>
+<body>
+	<form id="myForm">
+		<input type="text" name="username" value="" />
+		<input type="button" value="Click me" name="" onclick="showMessage(this)" />
+	</form>
+
+	<button id="myBtn">Click me</button>
+
+	<button id="myBtn1">Click me</button>
+
+	<button id="myBtn2">Click me</button>
+
+	<script type="text/javascript">
+		var btn = document.querySelector('#myBtn');
+		btn.onclick = function () {
+			alert(this.id);
+		}
+
+		var btn1 = document.querySelector('#myBtn1');
+		btn1.addEventListener('click', function () {
+			console.log(this.id);
+		}, false);
+		btn1.addEventListener('click', function () {
+			console.log('hello world!');
+		}, false);
+
+		function showMessage (self) {
+			console.log(event.type);
+			with (document){
+				with (self.form){
+					console.log(id);
+					with (self) {
+						console.log(self.value);
+					}
+				}
+			}
+		}
+
+		// 跨浏览器事件处理程序
+		var EventUtil = {
+			addHandler: function (element, type, handler) {
+				if (document.addEventListener) {
+					element.addEventListener(type, handler, false);
+				}else if (document.attachEvent) {
+					element.attachEvent('on' + type, handler);
+				}else{
+					element['on' + type] = handler;
+				}
+			},
+			removeHandler: function (element, type, handler) {
+				if (document.removeEventListener) {
+					element.removeEventListener(type, handler, false);
+				}else if (document.detachEvent) {
+					element.detachEvent('on' + type, handler);
+				}else{
+					element['on' + type] = null;
+				}
+			}
+		}
+
+		var myBtn2 = document.querySelector('#myBtn2');
+		EventUtil.addHandler(myBtn2, 'click', handler);
+		function handler(){
+			alert(this.id);
+		}
+	</script>
+</body>
+</html>
