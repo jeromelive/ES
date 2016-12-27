@@ -37,7 +37,8 @@ EventUtil.addHandler(window, 'load', function () {
 });
 ```
 
-> 当图像元素指定了 src 特性，图像就开始下载，所以必须在指定 src 特性之前，为其指定 load 事件处理程序。如果是 <script> 元素指定了 src 特性还需要把元素添加到文档中，才开始下载 JavaScript 文件
+> 当图像元素指定了 src 特性，图像就开始下载，所以必须在指定 src 特性之前，为其指定 load 事件处理程序。
+> 如果是 <script> 元素指定了 src 特性还需要把元素添加到文档中，才开始下载 JavaScript 文件
 
 - unload: 用户从一个页面切换到另一个页面，触发 unload 事件
 
