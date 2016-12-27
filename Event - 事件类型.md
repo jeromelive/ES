@@ -90,7 +90,7 @@ EventUtil.addHandler(window,'scroll',function(event){
 
 > 只有 mouseenter 和 mouseleave 事件不冒泡，mouseover 和 mouseout 都含有一个相关元素 ，通过 relatedTarget 获取
 
-**鼠标事件的事件对象含有特定的坐标属性，如下：**
+**1. 鼠标事件的事件对象含有特定的坐标属性，如下：**
 
 - clientX: 表示事件发生时鼠标指针在视口中的水平坐标
 - clientY: 表示事件发生时鼠标指针在视口中的垂直坐标
@@ -99,14 +99,14 @@ EventUtil.addHandler(window,'scroll',function(event){
 - screenX: 表示事件发生时鼠标指针在屏幕的水平坐标
 - screenY: 表示事件发生时鼠标指针在屏幕的垂直坐标
 
-**修改键**
+**2. 修改键**
 
 - event.shiftKey: 鼠标操作时 shift 键被按下时，为 true 值，反之为 false 值
 - event.ctrlKey: 鼠标操作时 ctrl 键被按下时，为 true 值，反之为 false 值
 - event.altKey: 鼠标操作时 alt 键被按下时，为 true 值，反之为 false 值
 - event.metaKey: 鼠标操作时 meta 键被按下时，为 true 值，反之为 false 值
 
-**相关元素**
+**3. 相关元素**
 
 mouseover 和 mouseout 事件涉及一个相关元素。
 
@@ -131,7 +131,7 @@ getRelatedTrget: function (event) {
 }
 ```
 
-**鼠标按钮**
+**4. 鼠标按钮**
 
 DOM 的 button 属性可能有以下3个值： 0 表示主鼠标按钮，1 表示中间的鼠标按钮（鼠标滚轮按钮），2 表示次鼠标按钮
 
@@ -167,3 +167,41 @@ fetBurron: function (event) {
 	}
 }
 ```
+
+** 5. 更多的事件信息**
+
+"DOM2 级事件"规范在 event 对象中还提供了 detail 属性，用于给出有关事件的更多信息。对于鼠标事件来说，detail 中包含了一个数值，表示在给定位置上发生了多少次单击。在同一个元素上相继发生一次 mousedown 和 一次 mouseup 事件算作一次单击。detail 属性从 1 开始计数，每次单击发生后都会递增。如果鼠标在 mousedown 和 mouseup 之间移动了位置，则 detail 会被重置为0
+
+** 6. 鼠标滚轮事件**
+
+- mousewheel: 当用户通过鼠标滚路浓郁页面交互、在垂直方向上滚动页面时，就会触发 mousewheel 事件。该事件对应的 event 对象除包含鼠标事件的所有标准信息外，还包含了一个特殊的 wheelDelta 属性。当用户向前滚动鼠标滚轮时，wheelDelta 是 120 的倍数，向后滚动式为 -120 的倍数。
+
+- DOMMouseScroll: 功能与 mousewheel 一样，只是该事件有关滚轮的信息则包含在 event 对象的 detail 属性中，而且向前滚动鼠标滚轮，detail 是 -3 的倍数，向后滚动时为 3 的倍数
+
+> 这个事件在任何元素上面都能触发，最终会冒泡到 document 或 window 对象，需要注意的是这个事件的 wheelDelta 属性有些浏览器上正负号是与上述相反的
+
+** 7. 触屏设备**
+
+> 对于 iOS 和 Android 设备的实现非常特别
+
+### 键盘与文本事件
+
+- keydown: 当用户按下键盘上的任意键是触发，而且如果按住不放的话，会重复触发此事件
+
+- keypress: 当用户按下键盘上的字符键是触发，而且如果按住不放的话，会重复触发此事件
+
+- keyup: 当用户释放键盘上的键时触发
+
+> 所有元素都支持以上3个事件，但只有在用户通过文本框输入时才最为常用
+
+1. 键码
+
+**当用户按下一个键盘上的字符键时，首先会触发 keydown 事件，然后紧跟着是 keypress 事件，最后会触发 keyup 事件。其中 keydown 和 keypress 都是在文本框发生变化之前被触发的，而 keyup 事件则是在文本框已经发生变化之后被触发的。如果用户按下了一个字符键不放，就会重复触发 keydown 和 keypress 事件，知道用户松开该键为止。如果用户按下的是一个非字符键，那么首次会触发 keydown 事件，然后就是 keyup 事件，如果按下了一个非字符键不放此时会触发 keyup 事件**
+
+> keydown 和 keyup 事件，通过 event 对象的 keyCode 属性可以获取一个代码，与键盘上的一个特定的键对应。
+
+> 事件的 event 对象含有一个 charCode 属性，可以获取被按下的键对应的键码，要想跨浏览器的方式取得键码，应该先检测 charCode 是否能用在调用 keyCode（在某些浏览器上保存的字符的 ASCII 编码）
+
+2. textInput: 只有可编辑区域才能出发 textInput 事件，该事件只会在用户按下能够输入实际字符的键时才会被触发。通过 event 对象的 data 属性能访问到用户输入的字符。例如：用户按下 S 键， data 的值是 s,如果按住上档键时按下该键， data 的值就是 'S'。
+
+> 另外该事件的 event 对象还含有一个 inputMethod 属性，表示文档输入到文本框中的方式

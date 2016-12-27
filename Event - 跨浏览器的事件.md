@@ -77,6 +77,24 @@ var EventUtil = {
 			}
 		}
 	}
+
+	// 获取鼠标滚轮滚动信息
+	getWheelDelta: function(event) {
+		if(event.wheelDelta){
+			return event.wheelDelta;
+		}else{
+			return -event.detail * 40;
+		}
+	}
+
+	// 获取键码
+	getCharCode: function (event) {
+		if(typeof event.charCode == 'number'){
+			return event.charCode;
+		}else{
+			return event.keyCode;
+		}
+	}
 }
 
 var myBtn2 = document.querySelector('#myBtn2');

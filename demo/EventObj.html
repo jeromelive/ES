@@ -3,9 +3,20 @@
 <head>
 	<meta charset="UTF-8">
 	<title>事件对象</title>
+	<style type="text/css">
+		ul#myList{
+			position: absolute;
+		}
+	</style>
 </head>
 <body>
 	<button id="myBtn">Click me</button>
+	<ul id="myList">
+		<li>adad</li>
+		<li>adada</li>
+		<li>adada</li>
+		<li>adada</li>
+	</ul>
 
 	<script type="text/javascript">
 		var btn = document.getElementById('myBtn');
@@ -74,11 +85,82 @@
 			}
 		}
 
-		var handler = function(event){
+		var handler = function (event) {
+			event = EventUtil.getEvent(event);
 			console.log('clientX:' + event.clientX + 'clientY:' + event.clientY + 'pageX:' + event.pageX + 'pageY:' + event.pageY + 'screenX:' + event.screenX + 'screenY:' + event.screenY);
+		}
+		var handler1 = function (event) {
+			event = EventUtil.getEvent(event);
+			console.log('detail:' + event.detail);
+		}
+
+		var handler2 = function (event) {
+			event = EventUtil.getEvent(event);
+			console.log(event.wheelDelta);
+		}
+
+		// var handler3 = function (event) {
+		// 	event = EventUtil.getEvent(event);
+		// 	console.log(event.)
+		// }
+
+		var handler4 = function (event) {
+
 		}
 
 		// EventUtil.addHandler(document.body, 'mousemove', handler);
+		// EventUtil.addHandler(document.body, 'click', handler1);
+		EventUtil.addHandler(document, 'mousewheel', handler2);
+
+		EventUtil.addHandler(window, 'load', function (event) {
+			var ul = document.getElementById('myList');
+
+			EventUtil.addHandler(document, 'DOMSubtreeModified', function (event) {
+				event = EventUtil.getEvent(event);
+				console.log(event.type);
+				console.log(event.target);
+				console.log(event.relatedNode);
+			});
+
+			EventUtil.addHandler(document, 'DOMNodeRemoved', function (event) {
+				event = EventUtil.getEvent(event);
+				console.log(event.type);
+				console.log(event.target);
+				console.log(event.relatedNode);
+			});
+
+			EventUtil.addHandler(document, 'contextmenu', function (event) {
+				event = EventUtil.getEvent(event);
+				console.log('menu');
+				EventUtil.preventDefault(event);
+
+				ul.style.left = event.clientX + 'px';
+				ul.style.top = event.clientY + 'px';
+				ul.style.visibility = 'visible';
+			});
+
+			EventUtil.addHandler(document, 'click', function (event) {
+				ul.style.visibility = 'hidden';
+			});
+
+			EventUtil.addHandler(window, 'beforeunload', function (event) {
+				event = document.getEvent(event);
+				console.log('beforeunload');
+				EventUtil.preventDefault(event);
+				var message = 'asdadad';
+				event.returnValue = message;
+				return message;
+			});
+
+			// ul.parentNode.removeChild(ul);
+
+			// EventUtil.addHandler(document. 'DOMNode')
+		});
+
+		EventUtil.addHandler(document, 'readystatechange', function (event) {
+			event = EventUtil.getEvent(event);
+			console.log(document.readyState);
+		});
 	</script>
 </body>
 </html>
