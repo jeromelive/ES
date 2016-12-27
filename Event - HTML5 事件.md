@@ -37,7 +37,7 @@ setTimeout(function(){
 // 这段代码的实际意思是：在当前 JavaScript 处理完成后立即运行这个函数，但不一定能保证这个事件处理程序会在 load 事件前运行
 ```
 
-- readystatechange: 当支持该事件的元素的 readyState 属性发生变化时，触发 readystatechange 事件，radyState 有如下5个值：
+- readystatechange: 当支持该事件的元素的 readyState 属性发生变化时，触发 readystatechange 事件，readyState 有如下5个值：
 	- uninitialized(未初始化): 对象存在但尚未初始化
 	- loading(正在加载): 对象正在加载数据
 	- loaded(加载完毕): 对象加载数据完成

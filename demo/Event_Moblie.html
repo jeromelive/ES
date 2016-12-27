@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+	<title>移动设备事件</title>
+	<script type="text/javascript" src="./EventUtil.js"></script>
+</head>
+<body>
+	<p>看这里</p>
+	<script type="text/javascript">
+		var p = document.querySelector('p');
+		document.body.onload = function(){
+			function handleTouchEvent (event) {
+				event = EventUtil.getEvent(event);
+				if (event.touches.length == 1){
+					switch (event.type){
+						case 'touchstart': 
+							p.firstChild.nodeValue = '触屏坐标：\n (' + event.touches[0].clientX + ',' + event.touches[0].clientX + ')';
+							break;
+						case 'touchend': 
+							p.firstChild.nodeValue = '触摸坐标: \n(' +event.changeTouches[0].clientX + ',' + event.changeTouches[0].clientX + ')';
+							break;
+						case 'touchmove':
+							EventUtil.preventDefault(event);
+							p.firstChild.nodeValue = '滚动坐标：\n (' + event.changeTouches[0].clientX + ',' + event.changeTouches[0].clientX + ')';
+							break;
+					}
+				}
+			}
+
+			EventUtil.addHandler(document, 'touchstart', handleTouchEvent);
+			EventUtil.addHandler(document, 'touchend', handleTouchEvent);
+			EventUtil.addHandler(document, 'touchmove', handleTouchEvent);
+		}
+	</script>
+</body>
+</html>
