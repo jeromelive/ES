@@ -41,6 +41,7 @@ EventUtil.addHandler(window, 'load', function () {
 
 - unload: 用户从一个页面切换到另一个页面，触发 unload 事件
 
+
 - resize: 当浏览器窗口被调整到一个新的高度或宽度是，就会触发 resize 事件。这个事件在 window （窗口）上面触发，因此可以通过 JavaScript 或 <body> 元素中的 onresize 特性来指定事件处理程序
 ```
 // JavaScript 方式：
