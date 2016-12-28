@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文本框的选择</title>
+	<script type="text/javascript" src="./EventUtil.js"></script>
+</head>
+<body>
+	
+	<form>
+		<!-- <input type="text" value="see me" name="intxt" size="25" maxlength="50"> -->
+		<input type="text" name="tel1" id="textTl1" maxlength="3">
+		<input type="text" name="tel2" id="textTl2" maxlength="3">
+		<input type="text" name="tel3" id="textTl3" maxlength="4">
+	</form>
+	
+	<script type="text/javascript">
+		document.body.onload = function(){
+			// var inp = document.forms[0].elements['intxt'];
+			// EventUtil.addHandler(inp, 'select', function(event){
+			// 	event = EventUtil.getEvent(event);
+			// 	var target = EventUtil.getTarget(event);
+
+			// 	if(typeof inp.selectionStart == 'number'){
+			// 		console.log(inp.value.substring(inp.selectionStart, inp.selectionEnd));
+			// 	}else if(document.selection){
+			// 		console.log(document.selection.createRange().text);
+			// 	}
+			// });
+			// EventUtil.addHandler(inp, 'keypress', function(event){
+			// 	event = EventUtil.getEvent(event);
+			// 	var charCode = event.charCode;
+
+			// 	if(!/\d/.test(String.fromCharCode(charCode))){
+			// 		EventUtil.preventDefault(event);
+			// 	}
+			// });
+
+			function tabForward(event){
+				event = EventUtil.getEvent(event);
+				var target = EventUtil.getTarget(event);
+
+				if(target.value.length == target.maxLength){
+					for(var i = 0, len = document.forms[0].elements.length; i < len; i++){
+						if(document.forms[0].elements[i] == target){
+							if(document.forms[0].elements[i + 1]){
+								document.forms[0].elements[i + 1].focus();
+							}
+							return
+						}
+					}
+				}
+			}
+
+			var textbox1 = document.getElementById('textTl1');
+			var textbox2 = document.getElementById('textTl2');
+			var textbox3 = document.getElementById('textTl3');
+
+			EventUtil.addHandler(textbox1, 'keyup', tabForward);
+			EventUtil.addHandler(textbox2, 'keyup', tabForward);
+			EventUtil.addHandler(textbox3, 'keyup', tabForward);
+		}
+	</script>
+
+</body>
+</html>

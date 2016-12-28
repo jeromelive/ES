@@ -168,11 +168,11 @@ fetBurron: function (event) {
 }
 ```
 
-** 5. 更多的事件信息**
+**5. 更多的事件信息**
 
 "DOM2 级事件"规范在 event 对象中还提供了 detail 属性，用于给出有关事件的更多信息。对于鼠标事件来说，detail 中包含了一个数值，表示在给定位置上发生了多少次单击。在同一个元素上相继发生一次 mousedown 和 一次 mouseup 事件算作一次单击。detail 属性从 1 开始计数，每次单击发生后都会递增。如果鼠标在 mousedown 和 mouseup 之间移动了位置，则 detail 会被重置为0
 
-** 6. 鼠标滚轮事件**
+**6. 鼠标滚轮事件**
 
 - mousewheel: 当用户通过鼠标滚路浓郁页面交互、在垂直方向上滚动页面时，就会触发 mousewheel 事件。该事件对应的 event 对象除包含鼠标事件的所有标准信息外，还包含了一个特殊的 wheelDelta 属性。当用户向前滚动鼠标滚轮时，wheelDelta 是 120 的倍数，向后滚动式为 -120 的倍数。
 
@@ -180,7 +180,18 @@ fetBurron: function (event) {
 
 > 这个事件在任何元素上面都能触发，最终会冒泡到 document 或 window 对象，需要注意的是这个事件的 wheelDelta 属性有些浏览器上正负号是与上述相反的
 
-** 7. 触屏设备**
+```
+// 获取鼠标滚轮滚动信息
+getWheelDelta: function(event) {
+	if(event.wheelDelta){
+		return event.wheelDelta;
+	}else{
+		return -event.detail * 40;
+	}
+}
+```
+
+**7. 触屏设备**
 
 > 对于 iOS 和 Android 设备的实现非常特别
 
@@ -196,12 +207,12 @@ fetBurron: function (event) {
 
 1. 键码
 
-**当用户按下一个键盘上的字符键时，首先会触发 keydown 事件，然后紧跟着是 keypress 事件，最后会触发 keyup 事件。其中 keydown 和 keypress 都是在文本框发生变化之前被触发的，而 keyup 事件则是在文本框已经发生变化之后被触发的。如果用户按下了一个字符键不放，就会重复触发 keydown 和 keypress 事件，知道用户松开该键为止。如果用户按下的是一个非字符键，那么首次会触发 keydown 事件，然后就是 keyup 事件，如果按下了一个非字符键不放此时会触发 keyup 事件**
+**当用户按下一个键盘上的字符键时，首先会触发 keydown 事件，然后紧跟着是 keypress 事件，最后会触发 keyup 事件。其中 keydown 和 keypress 都是在文本框发生变化之前被触发的，而 keyup 事件则是在文本框已经发生变化之后被触发的。如果用户按下了一个字符键不放，就会重复触发 keydown 和 keypress 事件，直到用户松开该键为止，此时会触发 keyup。如果用户按下的是一个非字符键，那么首次会触发 keydown 事件，然后就是 keyup 事件，如果按下了一个非字符键不放，此时会重复触发 keydown 事件，直到用户松开这个键，此时会触发 keyup**
 
 > keydown 和 keyup 事件，通过 event 对象的 keyCode 属性可以获取一个代码，与键盘上的一个特定的键对应。
 
-> 事件的 event 对象含有一个 charCode 属性，可以获取被按下的键对应的键码，要想跨浏览器的方式取得键码，应该先检测 charCode 是否能用在调用 keyCode（在某些浏览器上保存的字符的 ASCII 编码）
+> 事件的 event 对象含有一个 charCode 属性，这个属性只有在发生 keypress 事件时才包含值，可以获取被按下的键对应的键码，要想跨浏览器的方式取得键码，应该先检测 charCode 是否能用再调用 keyCode（在某些浏览器上keyCode保存的字符的 ASCII 编码）
 
 2. textInput: 只有可编辑区域才能出发 textInput 事件，该事件只会在用户按下能够输入实际字符的键时才会被触发。通过 event 对象的 data 属性能访问到用户输入的字符。例如：用户按下 S 键， data 的值是 s,如果按住上档键时按下该键， data 的值就是 'S'。
 
-> 另外该事件的 event 对象还含有一个 inputMethod 属性，表示文档输入到文本框中的方式
+> 另外该事件的 event 对象还含有一个 inputMethod 属性，表示文档输入到文本框中的方式，支持 textInput 属性的浏览器有 IE9+、Safari 和 Chrome
