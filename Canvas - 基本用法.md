@@ -56,19 +56,94 @@ if(drawing.getContext){
 ```
 <canvas width="100px" height="100px">A drawing of something.</canvas>
 
+<script type="text/javascript">
 var drawing0 = document.querySelectorAll('canvas')[0];
-if(drawing0.getContext){
-	var context = drawing0.getContext('2d');
+	if(drawing0.getContext){
+		var context = drawing0.getContext('2d');
 
-	context.fillStyle = '#ff0000';
-	context.fillRect(10, 10, 50, 50);
-	context.fillStyle = 'rgba(0, 0, 255, 0.5)';
-	context.fillRect(30, 30, 50, 50);
-	context.strokeStyle = 'rgba(0, 0, 255, 0.5)';
-	context.strokeRect(50, 50, 50, 50);
+		context.fillStyle = '#ff0000';
+		context.fillRect(10, 10, 50, 50);
+		context.fillStyle = 'rgba(0, 0, 255, 0.5)';
+		context.fillRect(30, 30, 50, 50);
+		context.strokeStyle = 'rgba(0, 0, 255, 0.5)';
+		context.strokeRect(50, 50, 50, 50);
 
-	context.clearRect(40, 40, 10, 10);
-}
+		context.clearRect(40, 40, 10, 10);
+	}
+</script>
 ```
 
 ![图像](./image/QQ截图20161229154616.png)
+
+### 2.3. 绘制路径
+
+- beginPath() 方法表示开始绘制新路径，要绘制路径必须调用该方法
+- closePath() 方法表示把绘制路径的终点与起点连接起来
+- fill() 方法表示绘制路劲完成后，填充它。在这方法之前需要使用 fillStyle 属性指定填充颜色
+- stroke() 方法对路劲描边。调用这个方法之前需要使用 strokeStyle 属性指定描边的颜色
+- clip() 方法在路劲上创建一个剪切区域
+- isPointInPath(x, y) 方法用于在路劲被关闭之前确定画布上的(x, y)坐标是否在路劲上，返回布尔值
+
+绘制路径的方法如下:      
+- arc(x, y, radius, startAngle, endAngle, countercolockwise): 以(x, y)为圆心绘制一条弧线，弧线半径为 radius，起始和结束角度（用弧度表示）分别为 startAngle 和 endAngle。最后一个参数表示 startAngle 和 endAngle 是否按逆时针方向计算，值为 false 表示按顺时针方向计算
+- arcTo(x1, y1, x2, y2, radius): 从上一点开始绘制一条弧线，到(x2, y2)位置，并且以给定的半径 radius 穿过(x1, y1)
+- bezierCurveTo(c1x, c1y, c2x, c2y, x, y): 从上一点开始绘制一条曲线，到(x, y)为止，并且以(c1x, c1y)和(c2x, c2y) 为控制点
+- lineTo(x, y): 从上一点开始绘制一条直线，到(x, y)为止
+- moveTo(x, y): 将绘图游标移动到(x, y)，不画线
+- quadraticCurveTo(cx, cy, x, y): 从上一点开始绘制一条二次曲线，到(x, y)为止，并且以(cx, cy)作为控制点
+- rect(x, y, width, height): 从(x, y)开始绘制一个矩形，宽度和高度分别有 width 和 height 指定。这个方法绘制的是矩形路径，而不是 strokeRect() 和 fillRect() 所绘制的独立的形状
+
+```
+<canvas width="200px" height="200px">A drawing of something.</canvas>
+
+<script type="text/javascript">
+	var drawing0 = document.querySelectorAll('canvas')[0];
+	if(drawing1.getContext){
+		var context = drawing1.getContext('2d');
+
+		context.beginPath();
+
+		// 绘制外圆
+		// context.lineTo(100, 100);
+		// canvas 起始的坐标为中心，下面绘制的圆会把左边制动移动到，右边边框的中点上
+		context.arc(100, 100, 99, 0, 2 * Math.PI, false);
+
+		// 绘制内圆
+		// 内圆需要把路径移动到内圆上的某一点，以避免绘制出多余的线条
+		context.moveTo(194, 100);
+		context.arc(100, 100, 94, 0, 2 * Math.PI, false);
+
+		// 绘制分针
+		context.moveTo(100, 100);
+		context.lineTo(100, 15);
+
+		// 绘制时针
+		context.moveTo(100, 100);
+		context.lineTo(35, 100);
+
+
+		// context.lineTo(35, 100);
+		// context.moveTo(0, 0);
+		// context.arcTo(0, 10, 200, 0, 5);
+
+		// context.lineWidth = '5';
+
+		// context.lineCap = 'square';
+
+		// context.lineJoin = 'bevel';
+
+		// context.closePath();
+
+		// 描边路径
+		context.strokeStyle = 'red';
+		context.stroke();
+
+		if(context.isPointInPath(100, 100)){
+			console.log('Point(100, 100) in the path');
+		};
+	}
+}
+</script>
+```
+
+![图像](./image/QQ图片20161229160639.png)
