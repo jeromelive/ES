@@ -13,12 +13,20 @@
 	
 	<canvas width="100rem" height="100rem">A drawing of something.</canvas>
 	<canvas width="200px" height="200px">A drawing of something.</canvas>
+	<canvas width="200px" height="200px">A drawing of something.</canvas>
+	<canvas width="200px" height="200px">A drawing of something.</canvas>
+	<canvas width="200px" height="200px">A drawing of something.</canvas>
+	<canvas width="200px" height="200px">A drawing of something.</canvas>
+	<canvas width="200px" height="200px">A drawing of something.</canvas>
+	<canvas width="200px" height="200px">A drawing of something.</canvas>
+	<canvas width="200px" height="200px">A drawing of something.</canvas>
+	<canvas width="200px" height="200px">A drawing of something.</canvas>
 
 	<script type="text/javascript">
 		document.body.onload = function(){
 			var drawing0 = document.querySelectorAll('canvas')[0];
 			if(drawing0.getContext){
-				var context = drawing0.getContext('2d');
+				let context = drawing0.getContext('2d');
 
 				context.fillStyle = '#ff0000';
 				context.fillRect(10, 10, 50, 50);
@@ -32,7 +40,7 @@
 
 			var drawing1 = document.querySelectorAll('canvas')[1];
 			if(drawing1.getContext){
-				var context = drawing1.getContext('2d');
+				let context = drawing1.getContext('2d');
 
 				context.beginPath();
 
@@ -81,9 +89,133 @@
 				context.strokeStyle = 'red';
 				context.stroke();
 
+				context.font = 'bold 14px Arial';
+				context.textAlign = 'center';
+				context.textBaseline = 'middle';
+				context.fillText('12', 100, 20);
+
+				// 起点对齐
+				context.textAlign = 'start';
+				context.fillText('12', 100, 40);
+
+				// 终点对齐
+				context.textAlign = 'end';
+				context.fillText('12', 100, 60);
+
+				context.translate(50,100);
+
 				if(context.isPointInPath(100, 100)){
 					console.log('Point(100, 100) in the path');
 				};
+			}
+
+			var drawing2 = document.querySelectorAll('canvas')[2];
+			if(drawing2.getContext){
+				let context = drawing2.getContext('2d');
+
+				context.fillStyle = '#ff0000';
+				context.save();
+
+				context.fillStyle = '#00ff00';
+				context.translate(100, 100);
+				context.save();
+
+				context.fillStyle = '#0000ff';
+				context.fillRect(0, 0, 100, 200);
+
+				context.restore();
+				context.fillRect(10, 10, 100, 200);
+
+				context.restore();
+				context.fillRect(0, 0, 100, 200);
+			}
+
+			var drawing3 = document.querySelectorAll('canvas')[3];
+			if(drawing3.getContext){
+				let context = drawing3.getContext('2d');
+				var img = new Image();
+				img.onload = function(){
+					context.drawImage(img, 0, 0);
+				}
+				img.src = './image/20161229165543.png';
+			}
+
+			var drawing4 = document.querySelectorAll('canvas')[4];
+			if(drawing4.getContext){
+				let context = drawing4.getContext('2d');
+				let img = new Image();
+				img.onload = function(){
+					context.translate(75, 75);
+					context.drawImage(img, 0, 0, 50, 50);
+				}
+				img.src = './image/20161229165543.png';
+			}
+
+			var drawing5 = document.querySelectorAll('canvas')[5];
+			if(drawing5.getContext){
+				let context = drawing5.getContext('2d');
+				let img = new Image();
+				img.onload = function(){
+					context.translate(75, 75);
+					context.drawImage(img, 75, 75, 200, 200, 0, 0, 200, 200);
+				}
+				img.src = './image/20161229165543.png';
+			}
+
+			var drawing6 = document.querySelectorAll('canvas')[6];
+			if(drawing6.getContext){
+				let context = drawing6.getContext('2d');
+				context.shadowOffsetX = 5;
+				context.shadowOffsetY = 5;
+				context.shadowBlur = 4;
+				context.shadowColor = 'rgba(0, 0, 0, 0.5)';
+
+				context.fillStyle = '#ff0000';
+				context.fillRect(0, 0, 50, 50);
+
+				context.fiilStyle = 'rgba(0, 0, 255, 1)';
+				context.fillRect(30, 30, 50, 50);
+			}
+
+			var drawing7 = document.querySelectorAll('canvas')[7];
+			if(drawing7.getContext){
+				let context = drawing7.getContext('2d');
+
+				context.fillStyle = '#ff0000';
+				context.fillRect(30, 30, 50, 50);
+
+				let gradient = context.createLinearGradient(50, 50, 120, 120);
+
+				gradient.addColorStop(0, 'white');
+				gradient.addColorStop(1, 'black');
+
+				context.fillStyle = gradient;
+				context.fillRect(50, 50, 70, 70);
+			}
+
+			var drawing8 = document.querySelectorAll('canvas')[8];
+			if(drawing8.getContext){
+				let context = drawing8.getContext('2d');
+
+				let gradient = context.createRadialGradient(100, 100, 30, 100, 100, 100);
+
+				gradient.addColorStop(0, 'white');
+				gradient.addColorStop(1, 'black');
+
+				context.fillStyle = gradient;
+				context.fillRect(0, 0, 200, 200);
+			}
+
+			var drawing9 = document.querySelectorAll('canvas')[9];
+			if(drawing9.getContext){
+				let context = drawing9.getContext('2d');
+				let image = new Image();
+				image.onload = function(){
+					let pattern = context.createPattern(image, 'repeat');
+					context.fillStyle = pattern;
+					context.fillRect(10, 10, 150, 150);
+				}
+				image.src = './image/20161229165543.png';
 			}
 		}
 	</script>
