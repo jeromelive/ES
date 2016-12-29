@@ -139,6 +139,8 @@ EventUtil.addHandler(form,'submit', function(event){
 
 ### 3.3.共有的表单字段事件
 
+- focues: 当前字段获取焦点时触发
+
 - blur: 当前字段失去焦点时触发
 
 - change: 对于`<input>`和 `<textarea>`元素，在他们失去焦点且 value 值改变时触发；对于 `<select>`元素，在其选项改变时触发
