@@ -117,6 +117,7 @@ EventUtil.addHandler(inp, 'keypress', function(event){
 ### 3.自动切换焦点
 
 ```
+// 使用 keyup 事件处理程序
 <form>
 	<input type="text" name="tel1" id="textTl1" maxlength="3">
 	<input type="text" name="tel2" id="textTl2" maxlength="3">

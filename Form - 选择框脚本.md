@@ -10,7 +10,7 @@
 - multiple: 布尔值，表示是否允许多项选择；等价于 HTML 中的 multiple 特性
 - remove(index): 移除给定位置的选项
 - selectedIndex: 基于 0 的选中项的索引，如果没有选中项，则值为 -1.对于支持多选的控件，值保存选中项中第一项的索引。设置该值会导致取消以前的所有选项并选择指定的那一项。
-- size: 选择框中可见的行书；等价于 HTML 中的 size 特性
+- size: 选择框中可见的行数；等价于 HTML 中的 size 特性
 
 ***选项框的 type 属性不是 "select-one"，就是"select-multiple"，这取决于 HTML 代码中有没有 multiple 特性。***
 
