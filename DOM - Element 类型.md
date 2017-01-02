@@ -52,7 +52,7 @@ div.nodeNmae; // 'DIV'
 
 ### 5. attributes 属性
 
-attrbutes 属性包含一个 NamedNodeMap，与 NodeList 类似，也是一个 "动态" 的集合。元素的每一个特性都由一个 Attr 节点表示，每个节点都保存在 NamedNodeMap 对象中
+attributes 属性包含一个 NamedNodeMap，与 NodeList 类似，也是一个 "动态" 的集合。元素的每一个特性都由一个 Attr 节点表示，每个节点都保存在 NamedNodeMap 对象中
 
 NamedNodeMap 对象拥有的方法
 

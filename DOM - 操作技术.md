@@ -82,7 +82,7 @@ loadStyleString('body{background-color:red}');
 
 ## 操作表格
 
-**HTML DOM 为<table>、<tbody>、<tr>元素添加了以下属性和方法**
+**HTML DOM 为`<table>`、`<tbody>`、`<tr>`元素添加了以下属性和方法**
 
 为 table 元素添加的属性和方法如下：
 - caption: 保存着对 `<caption>` 元素（如果有）的指针

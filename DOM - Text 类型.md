@@ -17,7 +17,7 @@
 - appendData(text) 将 text 添加到节点的末尾
 - deleteData(offset, count) 从 offset 指定的位置开始删除 count 个字符
 - insertData(offset, text) 从 offset 指定的位置插入 text
-- repalceData(offset, count, text) 用 text 替换从 offset 指定的位置开始到 offset + count 为此处的文本
+- replaceData(offset, count, text) 用 text 替换从 offset 指定的位置开始到 offset + count 为此处的文本
 - splitText(offset) 从 offset 指定的位置将当前文本节点分成两个文本节点
 - substringData(offset, count) 提取从 offset 指定的位置开始 offset + count 为止出的字符串
 
@@ -34,7 +34,7 @@
 
 ### 1. 创建文本节点
 
-- document.creatTextNode() 方法创建新文本节点。方法接受一个参数：要插入的节点中的文本
+- document.createTextNode() 方法创建新文本节点。方法接受一个参数：要插入的节点中的文本
 
 ```
 var element = document.createElement('div');

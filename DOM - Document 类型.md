@@ -55,13 +55,13 @@ var referrer = document.referrer;
 ```
 
 > URL 与 domain 属性是相互关联的。
-> 如果 document.URL 等于 http://www.wrox.com/WileyCDA/，那么 document.domain 就等于 www.wrox.com
+> 如果 document.URL 等于 `http://www.wrox.com/WileyCDA/`，那么 document.domain 就等于 www.wrox.com
 
-> 其中 domain 是可以设置的。但由于安全方面的限制，domain 并不能设置任何值，例如 p2p.wrox.com，domain 只能设置为 "wrox.com"。不能讲这个属性设置为 URL 中部包含的域
+> 其中 domain 是可以设置的。但由于安全方面的限制，domain 并不能设置任何值，例如 `p2p.wrox.com`，domain 只能设置为 "wrox.com"。不能将这个属性设置为 URL 中部包含的域
 
-> 当页面中包含来自其他子域的框架或内嵌框架时，通过设置 document.domain 能是这些页面相互访问对方包含的 JavaScript 对象。例如，假设有一个页面加载子 www.wrox.com，其中包含一个内嵌框架，框架内的页面加载子 p2p.wrox.com。由于 document.domain 字符串不一样，内外两个页面之间无法相互访问对方的 JavaScript 对象。但将两个页面的 document.domain 值都设置为 'wrox.com'，它们之间就可以通信了。
+> 当页面中包含来自其他子域的框架或内嵌框架时，通过设置 document.domain 能是这些页面相互访问对方包含的 JavaScript 对象。例如，假设有一个页面加载子 `www.wrox.com`，其中包含一个内嵌框架，框架内的页面加载子 p2p.wrox.com。由于 document.domain 字符串不一样，内外两个页面之间无法相互访问对方的 JavaScript 对象。但将两个页面的 document.domain 值都设置为 'wrox.com'，它们之间就可以通信了。
 
-> 如果域名一开始是"松散的"，那么久不能将它再设置为"紧绷的"。就是说：将 document.demain 设置为 "wrox.com" 之后，不能再讲起设置会 "p2p.wrox.com"，否则将会导致错误
+> 如果域名一开始是"松散的"，那么就不能将它再设置为"紧绷的"。就是说：将 document.demain 设置为 "wrox.com" 之后，不能再将其设置回 "p2p.wrox.com"，否则将会导致错误
 
 ### 3. 查找元素
 
@@ -81,7 +81,7 @@ document.getElementsByName() 通过 name 特性查找，返回零或多个元素
 
 以下集合都是 HTMLCollection 对象
 
-document.anchors，包含文档中所有带有 namr 特性的 a 元素
+document.anchors，包含文档中所有带有 name 特性的 a 元素
 
 document.forms，包含文档中所有的 form 元素，与 document.getElementsByTagName('form') 得到的结果相同
 
