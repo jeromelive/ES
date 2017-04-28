@@ -106,7 +106,7 @@ btn.onclick = null;
 	- 作为事件处理程序的函数
 	- 布尔值，为 true 表示捕获阶段调用事件处理程序，反之，表示冒泡阶段调用事件处理程序
 
-- removeEventListener() 方法用于删除事件处理程序的操作，传入参数要与 attachEvent()() 方法传入的一致，意味着通过 attachEvent()() 添加的匿名函数将无法移除
+- removeEventListener() 方法用于删除事件处理程序的操作，传入参数要与 addEventListener() 方法传入的一致，意味着通过 addEventListener() 添加的匿名函数将无法移除
 
 ```
 <button id="myBtn1">Click me</button>
@@ -142,7 +142,7 @@ btn1.removeEventListener('click', handler, false);
 
 - attachEvent() 方法
 
-- detachEvent() 方法传入参数要与 attachEvent() 方法传入的一致，意味着通过 addEventListener() 添加的匿名函数将无法移除
+- detachEvent() 方法传入参数要与 attachEvent() 方法传入的一致，意味着通过 attachEvent() 添加的匿名函数将无法移除
 	- 接受2个参数：
 	- 事件处理程序名称
 	- 事件处理程序函数
